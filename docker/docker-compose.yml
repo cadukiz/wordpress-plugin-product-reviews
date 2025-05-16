@@ -18,7 +18,8 @@ services:
     command: ["/bin/bash", "-c", "/post-init.sh && docker-entrypoint.sh apache2-foreground"]
 
   db:
-    image: mysql:5.7
+    image: mysql:5.7.39-debian
+    platform: linux/amd64 
     restart: always
     environment:
       MYSQL_DATABASE: wordpress
