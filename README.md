@@ -1,5 +1,15 @@
 # WordPress Plugin Technical Assessment
 
+
+# Tasks 3 and Bonus are done after time:
+Branch: [after-time](https://github.com/cadukiz/wordpress-plugin-product-reviews/tree/after-time).
+I've used Cursor to help me.
+This if not merged in main, because I broke the time and rules but I don't like to leave things open :-) 
+
+Thanks João and Mariana
+
+---
+
 ## 📌 Overview
 This project sets up a **WordPress environment with Docker** and includes a **Simple Reviews Plugin** for a technical assessment. 
 
