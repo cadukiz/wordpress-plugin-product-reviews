@@ -12,10 +12,15 @@ if (!defined('ABSPATH')) {
 
 class Simple_Reviews {
     public function __construct() {
-        add_action('init', [$this, 'register_product_review_cpt']);        
+        add_action('init', [$this, 'register_product_review_cpt']);   
+        add_action('rest_api_init', [$this, 'register_rest_routes']);   
+        
     }
 
- 
+    public function display_product_reviews_init(){
+        add_shortcode('sent',[$this,'display_product_reviews']);
+    }
+    
     public function register_product_review_cpt() {
         register_post_type('product_review', [
             'labels'      => [
@@ -38,6 +43,11 @@ class Simple_Reviews {
         register_rest_route('mock-api/v1', '/review-history/', [
             'methods'  => 'GET',
             'callback' => [$this, 'get_review_history'],
+            'permission_callback' => '__return_true',
+        ]);
+        register_rest_route('mock-api/v1', '/outliers/', [
+            'methods'  => 'GET',
+            'callback' => [$this, 'get_outliers'],
             'permission_callback' => '__return_true',
         ]);
     }
@@ -75,6 +85,14 @@ class Simple_Reviews {
 
         return rest_ensure_response($response);
     }
+
+    public function get_outliers() {
+        $mylink = $wpdb->get_row( "SELECT SUM( custom_field) / (TOTAL RECORDS) FROM $wpdb->links WHERE post_parent_id = 10" );
+
+
+    }
+  
+    
 
     public function display_product_reviews() {
         $reviews = get_posts([
